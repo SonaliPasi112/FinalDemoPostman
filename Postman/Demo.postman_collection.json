@@ -1,0 +1,478 @@
+{
+	"info": {
+		"_postman_id": "2bf6006c-d3ff-4c1f-ad5b-c62a60cc9c2c",
+		"name": "Demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CRUD APIs",
+			"item": [
+				{
+					"name": "https://reqres.in/api/users?page=2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "67375942-2019-4961-bcfe-1b330b861cb0",
+								"exec": [
+									"//Veryfy Status code returned for response is 200\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Very page number returned in response is 2\r",
+									"pm.test(\"Very page is 2\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.page).to.eql(2);\r",
+									"});\r",
+									"\r",
+									"//Veryfy if data id is 7 the email is michael.lawson@reqres.in\r",
+									"\r",
+									"pm.test(\"Veryfy if data id is 7 the email is michael.lawson@reqres.in\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    if(jsonData.data[0].id == 7)\r",
+									"    {\r",
+									"        pm.expect(jsonData.data[0].email).to.eql(\"michael.lawson@reqres.in\");\r",
+									"    }\r",
+									"    \r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.in/api/users?page=2",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://reqres.in/api/users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c2e9c051-c9ea-4af1-944c-7e7fe3c3375b",
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201,202]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify response body have id\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"id\");\r",
+									"});\r",
+									"pm.test(\"Verify respones body have createdAt\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"createdAt\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Sonali\",\r\n    \"job\": \"Tester\"\r\n}"
+						},
+						"url": {
+							"raw": "https://reqres.in/api/users",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://reqres.in/api/users/218",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7800ef4d-f193-448e-810f-fcd5f3fb062b",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Verify response returned have updatedAt\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"updatedAt\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Sonali\",\r\n    \"job\": \"Developer\"\r\n}"
+						},
+						"url": {
+							"raw": "https://reqres.in/api/users/218",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users",
+								"218"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://reqres.in/api/users/218",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "97e44590-84c1-469b-aa43-dad340836cdb",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code name has No Content\", function () {\r",
+									"    pm.response.to.have.status(\"No Content\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify response is empty\", function () {\r",
+									"     pm.expect('').to.be.empty;\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.in/api/users/218",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users",
+								"218"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Authentication API",
+			"item": [
+				{
+					"name": "Basic Auth API",
+					"item": [
+						{
+							"name": "Success",
+							"item": [
+								{
+									"name": "https://postman-echo.com/basic-auth",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "3c3246a8-ccb6-42e0-95ee-064aa7a9cdab",
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"pm.test(\"Your test name\", function () {\r",
+													"    var jsonData = pm.response.json();\r",
+													"    pm.expect(jsonData.authenticated).to.eql(true);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "basic",
+											"basic": [
+												{
+													"key": "password",
+													"value": "password",
+													"type": "string"
+												},
+												{
+													"key": "username",
+													"value": "postman",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://postman-echo.com/basic-auth",
+											"protocol": "https",
+											"host": [
+												"postman-echo",
+												"com"
+											],
+											"path": [
+												"basic-auth"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "Failure",
+							"item": [
+								{
+									"name": "https://postman-echo.com/basic-auth",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "d7ff1018-91d1-49e1-9ae4-ab146d79f7e5",
+												"exec": [
+													"pm.test(\"Status code is 401\", function () {\r",
+													"    pm.response.to.have.status(401);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Status code name has Unauthorized\", function () {\r",
+													"    pm.response.to.have.status(\"Unauthorized\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Verify response returned Unauthorized\", function () {\r",
+													"    pm.response.to.have.body(\"Unauthorized\");\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "basic",
+											"basic": [
+												{
+													"key": "password",
+													"value": "passwor",
+													"type": "string"
+												},
+												{
+													"key": "username",
+													"value": "postman",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://postman-echo.com/basic-auth",
+											"protocol": "https",
+											"host": [
+												"postman-echo",
+												"com"
+											],
+											"path": [
+												"basic-auth"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Bearer Token API",
+					"item": [
+						{
+							"name": "Failure",
+							"item": [
+								{
+									"name": "https://gorest.co.in/public-api/users",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "98fc36b1-afd7-4286-8222-df4cf6072ee8",
+												"exec": [
+													"pm.test(\"Verify response has returned  success as False\", function () {\r",
+													"    var jsonData = pm.response.json();\r",
+													"    pm.expect(jsonData._meta.success).to.eql(false);\r",
+													"});\r",
+													"pm.test(\"Verify body has returned code as 401\", function () {\r",
+													"    var jsonData = pm.response.json();\r",
+													"    pm.expect(jsonData._meta.code).to.eql(401);\r",
+													"    });\r",
+													"\r",
+													"\r",
+													"pm.test(\"Verify body has returned mesage as Authentication failed\", function () {\r",
+													"    var jsonData = pm.response.json();\r",
+													"    pm.expect(jsonData._meta.message).to.eql(\"Authentication failed.\");\r",
+													"\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer"
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://gorest.co.in/public-api/users",
+											"protocol": "https",
+											"host": [
+												"gorest",
+												"co",
+												"in"
+											],
+											"path": [
+												"public-api",
+												"users"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "Success",
+							"item": [
+								{
+									"name": "https://gorest.co.in/public-api/users",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "bb90eb4d-c484-4d46-9035-7fc554f53c20",
+												"exec": [
+													"pm.test(\"Verify Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Verify response body have meta and results\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"_meta\");\r",
+													"    pm.expect(pm.response.text()).to.include(\"result\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Verify meta have correct values \", function () {\r",
+													"    var jsonData = pm.response.json();\r",
+													"\r",
+													"    pm.expect(jsonData._meta.success).to.eql(true);\r",
+													"    pm.expect(jsonData._meta.code).to.eql(200);\r",
+													"    pm.expect(jsonData._meta.message).to.eql(\"OK. Everything worked as expected.\");\r",
+													"    pm.expect(jsonData._meta.totalCount).to.eql(2038);\r",
+													"    pm.expect(jsonData._meta.pageCount).to.eql(102);\r",
+													"    pm.expect(jsonData._meta.currentPage).to.eql(1);\r",
+													"    pm.expect(jsonData._meta.perPage).to.eql(20);\r",
+													"});\r",
+													"   \r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "NrlKELgdLqsBA5NjhP0cB-wKz_D3fyiGKpha",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://gorest.co.in/public-api/users",
+											"protocol": "https",
+											"host": [
+												"gorest",
+												"co",
+												"in"
+											],
+											"path": [
+												"public-api",
+												"users"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
